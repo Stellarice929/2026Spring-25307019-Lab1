@@ -1,12 +1,24 @@
 {
   "module": {
-  "name": "entry",
-  "type": "entry",
-  "deviceTypes": ["phone","tablet","tv"], // 多设备部署核心配置
-  "mainElement": "EntryAbility",
+    "name": "entry",
+    "type": "entry",
+    "deviceTypes": ["phone", "tablet", "tv"],
+    "mainElement": "EntryAbility",
     "deliveryWithInstall": true,
     "installationFree": false,
     "pages": "$profile:main_pages",
+
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.DISTRIBUTED_DATASYNC",
+        "reason": "$string:distributed_data_sync_reason",
+        "usedScene": {
+          "abilities": ["EntryAbility"],
+          "when": "inuse"
+        }
+      }
+    ],
+
     "abilities": [
       {
         "name": "EntryAbility",
@@ -20,16 +32,13 @@
         "exported": true,
         "skills": [
           {
-            "entities": [
-              "entity.system.home"
-            ],
-            "actions": [
-              "ohos.want.action.home"
-            ]
+            "entities": ["entity.system.home"],
+            "actions": ["ohos.want.action.home"]
           }
         ]
       }
     ],
+
     "extensionAbilities": [
       {
         "name": "EntryBackupAbility",
@@ -41,14 +50,7 @@
             "name": "ohos.extension.backup",
             "resource": "$profile:backup_config"
           }
-        ],
-        ,"requestPermissions": [
-    {
-        "name": "ohos.permission.DISTRIBUTED_DATASYNC",
-        "reason": "跨设备应用自由流转",
-        "usedScene":{"abilities":["EntryAbility"],"when":"inuse"}
-    }
-]
+        ]
       }
     ]
   }
